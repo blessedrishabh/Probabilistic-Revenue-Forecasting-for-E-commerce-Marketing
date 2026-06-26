@@ -4,7 +4,7 @@ import logging
 from datetime import timedelta
 import pandas as pd
 import numpy as np
-
+import pickle
 from pipeline import load_google_ads, load_meta_ads, load_microsoft_ads, aggregate_to_weekly
 from feature_engineering import compute_features
 from models import BayesianForecaster, SeasonalNaiveForecaster
@@ -12,12 +12,12 @@ from budget_simulator import ResponseCurve, generate_scenarios
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-def run_pipeline(forecast_period_days=30):
+def run_pipeline(data_dir, model_path, output_path, forecast_period_days=30):
     logging.info(f"Running pipeline for {forecast_period_days} days forecast period.")
     logging.info("Ingesting raw CSVs...")
-    df_google = load_google_ads('data/google_ads_campaign_stats.csv')
-    df_meta = load_meta_ads('data/meta_ads_campaign_stats.csv')
-    df_ms = load_microsoft_ads('data/bing_campaign_stats.csv')
+    df_google = load_google_ads(os.path.join(data_dir, 'google_ads_campaign_stats.csv'))
+    df_meta = load_meta_ads(os.path.join(data_dir, 'meta_ads_campaign_stats.csv'))
+    df_ms = load_microsoft_ads(os.path.join(data_dir, 'bing_campaign_stats.csv'))
     
     df_all = pd.concat([df_google, df_meta, df_ms], ignore_index=True)
     if df_all.empty:
@@ -32,22 +32,28 @@ def run_pipeline(forecast_period_days=30):
     
     # FIX 1: Stage 1 — Forecast at Channel × CampaignType level
     logging.info("Model fitting and response curve estimation...")
-    segments = features_df.groupby(['channel', 'campaign_type'])
-    models = {}
-    curves = {}
+    # segments = features_df.groupby(['channel', 'campaign_type'])
+    # models = {}
+    # curves = {}
     
-    for (ch, ct), grp in segments:
-        bf = BayesianForecaster()
-        if not bf.fit(grp):
-            snf = SeasonalNaiveForecaster()
-            snf.fit(grp)
-            models[(ch, ct)] = ('snf', snf, grp)
-        else:
-            models[(ch, ct)] = ('bayesian', bf, grp)
+    # for (ch, ct), grp in segments:
+    #     bf = BayesianForecaster()
+    #     if not bf.fit(grp):
+    #         snf = SeasonalNaiveForecaster()
+    #         snf.fit(grp)
+    #         models[(ch, ct)] = ('snf', snf, grp)
+    #     else:
+    #         models[(ch, ct)] = ('bayesian', bf, grp)
             
-        rc = ResponseCurve()
-        rc.fit(grp)
-        curves[(ch, ct)] = rc
+    #     rc = ResponseCurve()
+    #     rc.fit(grp)
+    #     curves[(ch, ct)] = rc
+
+    logging.info("Loading pre-trained models.....")
+    with open(model_path, 'rb') as f: 
+        saved_data = pickle.load(f)
+        models = saved_data['models']
+        curves = saved_data['curves']
 
     # FIX 5: Recursive multi-step forecasting
     logging.info(f"Forecast generation (Baseline scenario, {forecast_period_days} days)...")
@@ -235,16 +241,35 @@ def run_pipeline(forecast_period_days=30):
         "P90": round(forecast_results['revenue']['P90'] / total_budget_input, 2) if total_budget_input > 0 else 0
     }
 
-    with open('forecast_output.json', 'w') as f:
-        json.dump(forecast_results, f, indent=2)
+    # with open('forecast_output.json', 'w') as f:
+    #     json.dump(forecast_results, f, indent=2)
 
-    logging.info("Forecasting pipeline complete. Output saved to forecast_output.json.")
+    flat_rows = []
+    for channel_name, channel_data in forecast_results['channels'].items():
+        row = {
+            "Channel": channel_name,
+            "Budget_Allocated": channel_data['budget_allocated'],
+            "Revenue_P10": channel_data["revenue"]["P10"],
+            "Revenue_P50": channel_data["revenue"]["P50"],
+            "Revenue_P90": channel_data["revenue"]["P90"],
+            "ROAS_P50": channel_data["roas"]["P50"]
+        }
+        flat_rows.append(row)
+
+    output_df = pd.DataFrame(flat_rows)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_df.to_csv(output_path, index= False)
+
+    logging.info(f"Forecasting pipeline complete. Output saved to {output_path}")
     
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Run forecasting pipeline.")
-    parser.add_argument('--days', type=int, default=30, choices=[30, 60, 90], 
-                        help='Forecasting window in days (30, 60, or 90)')
+    parser.add_argument('--data_dir', type = str, required = True)
+    parser.add_argument('--model_path', type = str, required = True)
+    parser.add_argument('--output_path', type = str, required = True)
+    parser.add_argument('--days', type=int, default=30, choices=[30, 60, 90])
     args = parser.parse_args()
     
-    run_pipeline(forecast_period_days=args.days)
+    np.random.seed(42)
+    run_pipeline(args.data_dir, args.model_path, args.output_path, forecast_period_days=args.days)
