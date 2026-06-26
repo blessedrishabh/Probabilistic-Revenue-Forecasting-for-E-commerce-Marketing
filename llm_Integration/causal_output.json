@@ -1,0 +1,26 @@
+{
+  "summary": "The revenue is expected to reach the P50 range due to the overall performance of Google and Meta channels, with Google's Non-Brand Search and Meta's Brand Search campaign types driving a significant portion of the revenue. However, the forecast intervals are wide due to high uncertainty, driven by factors such as data volume, volatility, and trend breaks. This uncertainty is particularly pronounced in the Google Video and Microsoft Other channels, which show near-zero projected revenue despite allocated budgets. As a result, stakeholders should interpret the recommended range with caution.",
+  "key_drivers": [
+    "Google - Non-Brand Search",
+    "Meta - Brand Search"
+  ],
+  "risks": [
+    "data volume",
+    "volatility"
+  ],
+  "opportunities": [
+    "Shift 10% of Google - Non-Brand Search budget to Microsoft - Non-Brand Search to increase P50 revenue by 1.3%.",
+    "Shift 10% of Meta - Brand Search budget to Google - Shopping to increase P50 revenue by 0.8%."
+  ],
+  "anomalies": [
+    "google - Video",
+    "microsoft - Other"
+  ],
+  "confidence_level": "LOW",
+  "metadata": {
+    "forecast_period_days": 90,
+    "scenario": "Baseline",
+    "analysis_timestamp": "2026-06-25T17:06:10.382300Z",
+    "model_used": "llama-3.1-8b-instant"
+  }
+}

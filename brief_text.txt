@@ -1,0 +1,578 @@
+ 
+Probabilistic  Revenue  Forecasting  for  
+E-commerce
+ 
+Marketing
+ 
+An  AI-Assisted  Forecasting  Utility  for  Digital  Marketing  Agencies  
+Introduction  
+E-commerce  businesses  invest  across  multiple  acquisition  channels  such  as  Google  Ads,  Meta  
+Ads,
+ 
+Microsoft
+ 
+Ads,
+ 
+organic
+ 
+search,
+ 
+affiliate
+ 
+networks,
+ 
+and
+ 
+display
+ 
+campaigns.
+ 
+Digital
+ 
+marketing
+ 
+agencies
+ 
+managing
+ 
+these
+ 
+businesses
+ 
+are
+ 
+expected
+ 
+to
+ 
+estimate
+ 
+future
+ 
+business
+ 
+outcomes
+ 
+before
+ 
+budgets
+ 
+are
+ 
+deployed.
+ 
+This
+ 
+is
+ 
+a
+ 
+difficult
+ 
+forecasting
+ 
+problem.
+ 
+Marketing  performance  is  influenced  by  seasonality,  changing  user  behavior,  inconsistent  campaign  
+structures,
+ 
+varying
+ 
+channel
+ 
+efficiency,
+ 
+and
+ 
+incomplete
+ 
+analytics
+ 
+visibility.
+ 
+Existing
+ 
+forecasting
+ 
+workflows
+ 
+are
+ 
+often
+ 
+spreadsheet-driven,
+ 
+manually
+ 
+maintained,
+ 
+and
+ 
+disconnected
+ 
+across
+ 
+platforms.
+ 
+This  hackathon  challenges  participants  to  build  a  practical  AI-assisted  forecasting  utility  that  predicts  
+ecommerce
+ 
+revenue
+ 
+and
+ 
+ROAS
+ 
+using
+ 
+historical
+ 
+analytics
+ 
+and
+ 
+sales
+ 
+data.
+ 
+The  solution  should  focus  on  realistic  business  forecasting  rather  than  theoretical  modeling,  while  
+clearly
+ 
+communicating
+ 
+assumptions,
+ 
+uncertainty,
+ 
+and
+ 
+operational
+ 
+insights.
+ 
+Why  This  Solution  Needs  to  Be  Built  
+Most  ecommerce  forecasting  today  suffers  from  three  major  problems:  1.  Many  forecasting  systems  optimize  for  traffic  or  conversions  without  considering  ROAS  
+constraints.
+ 2.  Marketing  data  is  fragmented  and  inconsistent.  Agencies  work  with  multiple  paid  channels,  
+manually
+ 
+tagged
+ 
+campaigns,
+ 
+and
+ 
+varying
+ 
+reporting
+ 
+structures
+ 
+across
+ 
+platforms.
+ 3.  Forecasts  rarely  explain  why  performance  is  expected  to  improve  or  decline,  making  
+strategic
+ 
+planning
+ 
+difficult.
+ 
+At  the  same  time,  agencies  increasingly  need  forward-looking  decision  support  instead  of  
+retrospective
+ 
+reporting.
+ 
+Challenge  Description  
+Participants  are  required  to  build  a  working  prototype  that  forecasts  future  ecommerce  performance  
+using
+ 
+historical
+ 
+marketing
+ 
+and
+ 
+sales
+ 
+data.
+ 
+The  solution  should  generate  probabilistic  forecasts  for:  ●  expected  ecommerce  revenue  (aggregate  of  Google  Ads,  MS  Ads,  and  Meta  Ads  revenue)  ●  expected  blended  ROAS,  
+1  of  5  
+ ●  channel-level  /  campaign-type  /  campaign-level  revenue  contribution,  ●  channel-level  /  campaign-type  /  campaign-level  ROAS  ranges.  
+The  forecasting  window  should  support  aggregate  planning  periods  between  30,  60  and  90  days.  
+The  system  should  use:  ●  Google  Ads,  MS  Ads,  and  Meta  Ads  conversion  data,  ●  For  campaign  type  forecasting,  consider  seasonality  based  on  available  data  ●  Use  additional  functions  to  forecast  revenue  based  on  different  media  budgets.  
+The  solution  should  support  forecasting  across  channels.  
+Participants  are  expected  to  use  existing  channel-level  attribution  data  as-is.  Building  a  custom  
+attribution
+ 
+engine
+ 
+or
+ 
+a
+ 
+full-scale
+ 
+Media
+ 
+Mix
+ 
+Modeling
+ 
+(MMM)
+ 
+is
+ 
+outside
+ 
+the
+ 
+scope
+ 
+of
+ 
+this
+ 
+challenge
+.
+ 
+The  forecasting  system  should  also  incorporate  an  AI-assisted  causal  inference  layer  using  LLM  
+APIs
+ 
+(such
+ 
+as
+ 
+OpenAI,
+ 
+Gemini,
+ 
+Anthropic
+ 
+or
+ 
+similar);
+ 
+LLMs
+ 
+may
+ 
+also
+ 
+be
+ 
+used
+ 
+for
+ 
+anomaly
+ 
+interpretation,
+ 
+forecast
+ 
+explanation,
+ 
+and
+ 
+identifying
+ 
+operational
+ 
+risks.
+ 
+The  focus  of  the  challenge  is  not  building  a  full  SaaS  platform,  but  creating  a  technically  sound  and  
+operationally
+ 
+realistic
+ 
+forecasting
+ 
+utility.
+ 
+Constraints  
+Participants  should  work  within  the  following  constraints:  ●  Forecasts  should  be  aggregate-period  forecasts  rather  than  daily  forecasts.  ●  Forecasts  should  be  probabilistic  ranges  instead  of  single  deterministic  values.  ●  Revenue  and  ROAS  are  the  primary  business  metrics  to  forecast.  ●  Existing  attribution  should  be  treated  as  the  source  of  truth.  
+The  objective  is  to  build  a  realistic  and  explainable  forecasting  prototype  within  the  hackathon  
+timeline.
+ 
+Deliverables  
+Participants  are  required  to  submit  the  following:  
+1.  Working  Prototype  
+A  functional  prototype  capable  of:  ●  ingesting  channel  level  datasets  (provided  as  .csv  file),  ●  validating  campaign  consistency,  ●  accepting  future  media  budget  inputs,  ●  generating  probabilistic  revenue  and  ROAS  forecasts,  ●  producing  channel-level  /  campaign-type  /  campaign-level  forecast  outputs,  ●  generating  AI-assisted  causal  summaries.  
+2.  Technical  Documentation  
+2  of  5  
+ A  concise  document  explaining:  ●  forecasting  methodology,  ●  model  selection,  ●  data  preprocessing  logic,  ●  assumptions,  ●  limitations,  ●  AI  integration  strategy.  
+3.  Architecture  Overview  
+A  brief  overview  of:  ●  frontend  stack,  ●  backend  stack,  ●  forecasting  pipeline,  ●  LLM  integration  workflow.  
+4.  Demo  Workflow  
+A  short  walkthrough  or  presentation  showing:  ●  data  ingestion,  ●  forecast  generation,  ●  budget  simulation,  ●  AI-generated  business  insights.  
+Evaluation  Criteria  
+Submissions  will  be  evaluated  based  on  the  following  criteria:  
+Technical  Soundness  ●  Quality  of  forecasting  methodology  ●  Appropriate  handling  of  uncertainty  ●  Realistic  modeling  assumptions  
+Practical  Relevance  ●  Alignment  with  real  ecommerce  marketing  workflows  ●  Operational  usefulness  for  agencies  and  marketers  ●  Business  interpretability  of  forecast  
+AI  Integration  ●  Effective  use  of  LLMs  for  reasoning  and  interpretation  ●  Quality  of  causal  summaries  and  insights  
+Product  Thinking  ●  Clarity  of  workflow  ●  Simplicity  and  usability  ●  Ability  to  communicate  forecasts  effectively  
+3  of  5  
+ 
+Engineering  Quality  ●  Code  quality  ●  Architecture  clarity  ●  Documentation  completeness  ●  Reliability  of  the  prototype  
+Timeline  
+●  Hackathon  Start  Date:  June  12,  2026  ●  Submission  Deadline:  July  19,  2026  ●  Finalist  Announcement:  July  27,  2026  ●  Final  Presentation:  August  5,  2026  
+Resources  
+Date  Link  -  AIgnition_dataset
+●  GA4  session  source/medium  conversion  data  ●  Shopify  conversion  data  
+Submissions  Guidelines  
+●  Check  the  attached  ‘Hackathon  Submission  Guide’  for  all  the  details.  
+ 
+Conclusion  
+This  challenge  focuses  on  a  realistic  and  increasingly  important  problem  in  modern  digital  
+marketing.
+ 
+Participants
+ 
+are
+ 
+encouraged
+ 
+to
+ 
+think
+ 
+beyond
+ 
+dashboards
+ 
+and
+ 
+reporting
+ 
+systems,
+ 
+and
+ 
+instead
+ 
+build
+ 
+intelligent
+ 
+forecasting
+ 
+utilities
+ 
+that
+ 
+combine
+ 
+statistical
+ 
+modeling,
+ 
+business
+ 
+reasoning,
+ 
+uncertainty
+ 
+estimation,
+ 
+and
+ 
+AI-assisted
+ 
+interpretation.
+ 
+The  strongest  solutions  will  demonstrate  technical  depth,  operational  realism,  and  clear  
+understanding
+ 
+of
+ 
+how
+ 
+forecasting
+ 
+influences
+ 
+real
+ 
+business
+ 
+decisions
+ 
+in
+ 
+ecommerce
+ 
+marketing.
+ 
+ 
+4  of  5  
+ 
+AIgnition  3.0  –  Terms  &  Conditions  
+1.  Intellectual  Property  (IP)  Rights  ○  All  ideas,  concepts,  prototypes,  code,  models,  presentations,  and  solutions  submitted  
+as
+ 
+part
+ 
+of
+ 
+the
+ 
+hackathon
+ 
+shall
+ 
+become
+ 
+the
+ 
+exclusive
+ 
+property
+ 
+of
+ 
+NetElixir.
+ ○  NetElixir  reserves  the  right  to  use,  modify,  enhance,  commercialize,  or  implement  any  
+submitted
+ 
+solution
+ 
+without
+ 
+further
+ 
+consent
+ 
+or
+ 
+compensation.
+ 2.  Participation  ○  Participation  is  voluntary  and  open  only  to  registered  participants.  ○  Teams  and  individuals  must  adhere  to  the  competition  guidelines  and  timelines.  3.  Expenses  ○  Any  expenses  incurred  by  participants,  including  internet  charges,  software  
+subscriptions,
+ 
+cloud
+ 
+services,
+ 
+travel,
+ 
+accommodation,
+ 
+hardware,
+ 
+or
+ 
+any
+ 
+other
+ 
+costs
+ 
+related
+ 
+to
+ 
+developing
+ 
+the
+ 
+solution,
+ 
+shall
+ 
+be
+ 
+borne
+ 
+by
+ 
+the
+ 
+participants.
+ ○  NetElixir  will  not  reimburse  any  such  expenses  unless  explicitly  communicated  in  
+writing.
+ 4.  Originality  ○  All  submissions  must  be  the  participant's  original  work.  ○  Any  plagiarism  or  unauthorized  use  of  third-party  intellectual  property  may  result  in  
+disqualification.
+ 5.  Confidentiality  ○  Participants  shall  maintain  the  confidentiality  of  any  proprietary  information,  datasets,  
+or
+ 
+business
+ 
+information
+ 
+shared
+ 
+by
+ 
+NetElixir.
+ 6.  Code  &  Solution  Review  ○  NetElixir  may  request  source  code,  documentation,  demos,  and  explanations  at  any  
+stage
+ 
+of
+ 
+the
+ 
+evaluation
+ 
+process.
+ 7.  Evaluation  &  Decisions  ○  The  decision  of  the  judging  panel  shall  be  final  and  binding.  ○  NetElixir  reserves  the  right  to  modify  evaluation  criteria,  timelines,  or  awards  if  
+required.
+ 8.  Disqualification  ○  NetElixir  reserves  the  right  to  disqualify  any  participant  for  misconduct,  plagiarism,  
+misrepresentation,
+ 
+or
+ 
+violation
+ 
+of
+ 
+the
+ 
+rules.
+ 9.  Employment  Opportunities  ○  Participation  in  the  hackathon  does  not  guarantee  an  internship,  employment,  or  any  
+future
+ 
+engagement
+ 
+with
+ 
+NetElixir.
+ 10.  Publicity  ○  Participants  grant  NetElixir  permission  to  use  their  names,  college  names,  
+photographs,
+ 
+videos,
+ 
+and
+ 
+project
+ 
+details
+ 
+for
+ 
+promotional
+ 
+and
+ 
+marketing
+ 
+purposes
+ 
+related
+ 
+to
+ 
+the
+ 
+hackathon.
+ 11.  Right  to  Amend  ○  NetElixir  reserves  the  right  to  amend,  modify,  or  cancel  any  aspect  of  the  hackathon  
+at
+ 
+its
+ 
+discretion.
+ 
+ 
+All  the  Best!!  
+ 
+5  of  5  

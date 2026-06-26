@@ -1,0 +1,231 @@
+{
+  "forecast_period_days": 60,
+  "scenario": "Baseline",
+  "channels": {
+    "google": {
+      "budget_allocated": 101775.75,
+      "revenue": {
+        "P10": 327620.56,
+        "P50": 402700.15,
+        "P90": 517579.52
+      },
+      "roas": {
+        "P10": 3.22,
+        "P50": 3.96,
+        "P90": 5.09
+      },
+      "campaign_types": [
+        {
+          "campaign_type": "Non-Brand Search",
+          "budget_allocated": 28633.42,
+          "revenue": {
+            "P10": 106850.91,
+            "P50": 136000.3,
+            "P90": 172686.71
+          },
+          "roas": {
+            "P10": 3.73,
+            "P50": 4.75,
+            "P90": 6.03
+          }
+        },
+        {
+          "campaign_type": "Other",
+          "budget_allocated": 1455.88,
+          "revenue": {
+            "P10": 2014.63,
+            "P50": 5166.76,
+            "P90": 11523.48
+          },
+          "roas": {
+            "P10": 1.38,
+            "P50": 3.55,
+            "P90": 7.92
+          }
+        },
+        {
+          "campaign_type": "PMAX",
+          "budget_allocated": 50695.12,
+          "revenue": {
+            "P10": 117987.45,
+            "P50": 142401.75,
+            "P90": 172552.92
+          },
+          "roas": {
+            "P10": 2.33,
+            "P50": 2.81,
+            "P90": 3.4
+          }
+        },
+        {
+          "campaign_type": "Shopping",
+          "budget_allocated": 18628.97,
+          "revenue": {
+            "P10": 51840.27,
+            "P50": 110968.01,
+            "P90": 221626.26
+          },
+          "roas": {
+            "P10": 2.78,
+            "P50": 5.96,
+            "P90": 11.9
+          }
+        },
+        {
+          "campaign_type": "Video",
+          "budget_allocated": 2362.36,
+          "revenue": {
+            "P10": 0.67,
+            "P50": 3.7,
+            "P90": 9.65
+          },
+          "roas": {
+            "P10": 0.0,
+            "P50": 0.0,
+            "P90": 0.0
+          }
+        }
+      ]
+    },
+    "meta": {
+      "budget_allocated": 15282.24,
+      "revenue": {
+        "P10": 46748.95,
+        "P50": 58924.96,
+        "P90": 75342.02
+      },
+      "roas": {
+        "P10": 3.06,
+        "P50": 3.86,
+        "P90": 4.93
+      },
+      "campaign_types": [
+        {
+          "campaign_type": "Brand Search",
+          "budget_allocated": 10158.54,
+          "revenue": {
+            "P10": 25860.94,
+            "P50": 35223.55,
+            "P90": 48778.55
+          },
+          "roas": {
+            "P10": 2.55,
+            "P50": 3.47,
+            "P90": 4.8
+          }
+        },
+        {
+          "campaign_type": "Other",
+          "budget_allocated": 559.99,
+          "revenue": {
+            "P10": 2689.08,
+            "P50": 5547.76,
+            "P90": 12764.37
+          },
+          "roas": {
+            "P10": 4.8,
+            "P50": 9.91,
+            "P90": 22.79
+          }
+        },
+        {
+          "campaign_type": "Retargeting",
+          "budget_allocated": 4563.71,
+          "revenue": {
+            "P10": 11636.38,
+            "P50": 16012.38,
+            "P90": 22963.05
+          },
+          "roas": {
+            "P10": 2.55,
+            "P50": 3.51,
+            "P90": 5.03
+          }
+        }
+      ]
+    },
+    "microsoft": {
+      "budget_allocated": 8334.94,
+      "revenue": {
+        "P10": 14371.32,
+        "P50": 40058.04,
+        "P90": 100592.17
+      },
+      "roas": {
+        "P10": 1.72,
+        "P50": 4.81,
+        "P90": 12.07
+      },
+      "campaign_types": [
+        {
+          "campaign_type": "Non-Brand Search",
+          "budget_allocated": 3966.81,
+          "revenue": {
+            "P10": 13466.77,
+            "P50": 39143.1,
+            "P90": 99524.88
+          },
+          "roas": {
+            "P10": 3.39,
+            "P50": 9.87,
+            "P90": 25.09
+          }
+        },
+        {
+          "campaign_type": "Other",
+          "budget_allocated": 1194.69,
+          "revenue": {
+            "P10": 0.0,
+            "P50": 0.0,
+            "P90": 0.0
+          },
+          "roas": {
+            "P10": 0.0,
+            "P50": 0.0,
+            "P90": 0.0
+          }
+        },
+        {
+          "campaign_type": "PMAX",
+          "budget_allocated": 3145.14,
+          "revenue": {
+            "P10": 83.1,
+            "P50": 480.93,
+            "P90": 2161.99
+          },
+          "roas": {
+            "P10": 0.03,
+            "P50": 0.15,
+            "P90": 0.69
+          }
+        },
+        {
+          "campaign_type": "Shopping",
+          "budget_allocated": 28.31,
+          "revenue": {
+            "P10": 2.7,
+            "P50": 18.8,
+            "P90": 81.95
+          },
+          "roas": {
+            "P10": 0.1,
+            "P50": 0.66,
+            "P90": 2.9
+          }
+        }
+      ]
+    }
+  },
+  "total_budget_input": 125392.93,
+  "revenue": {
+    "P10": 427793.09,
+    "P50": 516569.86,
+    "P90": 646395.27,
+    "currency": "USD"
+  },
+  "blended_roas": {
+    "P10": 3.41,
+    "P50": 4.12,
+    "P90": 5.15
+  }
+}
