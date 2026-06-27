@@ -3,9 +3,7 @@ title: Probabilistic Revenue Forecasting
 emoji: 📈
 colorFrom: indigo
 colorTo: green
-sdk: streamlit
-sdk_version: 1.45.1
-app_file: app.py
+sdk: docker
 pinned: false
 ---
 
