@@ -1,10 +1,16 @@
 import streamlit as st
 import requests
+import json
+import os
+
 
 st.set_page_config(page_title="AI Insights | AIgnition", page_icon="🧠", layout="wide")
 st.title("Causal AI Insights")
 
-API_URL = st.session_state.get("API_URL", "http://localhost:8000/api")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+INSIGHTS_FILE = os.path.join(BASE_DIR, 'llm_Integration', 'causal_output.json')
+
+
 
 st.markdown("""
 This module uses **LangGraph** to trigger a 9-node state machine that analyzes the Bayesian forecast outputs, detects anomalies, assesses confidence, and uses Groq (Qwen/Llama) to generate causal summaries and budget opportunities.
@@ -12,22 +18,30 @@ This module uses **LangGraph** to trigger a 9-node state machine that analyzes t
 
 col1, col2 = st.columns([1, 4])
 
+# with col1:
+#     if st.button("Generate Fresh Insights", type="primary"):
+#         with st.spinner("LangGraph is running... this may take a few seconds as it makes sequential LLM calls."):
+#             resp = requests.post(f"{API_URL}/insights")
+#             if resp.status_code == 200:
+#                 st.session_state.insights = resp.json()
+#                 st.success("Success!")
+#             else:
+#                 st.error("Failed to generate insights.")
 with col1:
-    if st.button("Generate Fresh Insights", type="primary"):
-        with st.spinner("LangGraph is running... this may take a few seconds as it makes sequential LLM calls."):
-            resp = requests.post(f"{API_URL}/insights")
-            if resp.status_code == 200:
-                st.session_state.insights = resp.json()
-                st.success("Success!")
-            else:
-                st.error("Failed to generate insights.")
-
-    if st.button("Load Last Insights"):
-        resp = requests.get(f"{API_URL}/insights")
-        if resp.status_code == 200:
-            st.session_state.insights = resp.json()
+    if st.button("Load Insights", type="primary"):
+        if os.path.exists(INSIGHTS_FILE):
+            with open(INSIGHTS_FILE, 'r') as f:
+                st.session_state.insights = json.load(f)
+            st.success("Loaded!")
         else:
-            st.error("No insights found.")
+            st.error("No insights file found.")
+
+    # if st.button("Load Last Insights"):
+    #     resp = requests.get(f"{API_URL}/insights")
+    #     if resp.status_code == 200:
+    #         st.session_state.insights = resp.json()
+    #     else:
+    #         st.error("No insights found.")
 
 with col2:
     if "insights" in st.session_state:

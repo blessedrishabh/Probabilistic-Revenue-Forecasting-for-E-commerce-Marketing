@@ -1,22 +1,30 @@
 import streamlit as st
 import requests
+import json
+import os
 import pandas as pd
 import plotly.express as px
 
 st.set_page_config(page_title="Channel Drilldown | AIgnition", page_icon="🔍", layout="wide")
 st.title("Channel Drilldown")
 
-API_URL = st.session_state.get("API_URL", "http://localhost:8000/api")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
 @st.cache_data(ttl=60)
 def fetch_channels():
-    try:
-        response = requests.get(f"{API_URL}/forecast/channels")
-        response.raise_for_status()
-        return response.json().get("channels", {})
-    except Exception as e:
-        st.error("Failed to load channels")
+    # try:
+    #     response = requests.get(f"{API_URL}/forecast/channels")
+    #     response.raise_for_status()
+    #     return response.json().get("channels", {})
+    # except Exception as e:
+    #     st.error("Failed to load channels")
+    #     return {}
+    fpath = os.path.join(BASE_DIR, 'Forecasting', 'forecast_output.json')
+    if not os.path.exists(fpath):
         return {}
+    with open(fpath, 'r') as f:
+        data = json.load(f)
+    return data.get("channels", {})
 
 channels = fetch_channels()
 

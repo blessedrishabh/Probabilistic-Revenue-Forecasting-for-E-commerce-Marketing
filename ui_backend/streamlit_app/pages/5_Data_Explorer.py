@@ -1,4 +1,7 @@
 import streamlit as st
+import json
+import os
+import sys
 import requests
 import pandas as pd
 import plotly.express as px
@@ -6,17 +9,23 @@ import plotly.express as px
 st.set_page_config(page_title="Data Explorer | AIgnition", page_icon="🗄️", layout="wide")
 st.title("Historical Data Explorer")
 
-API_URL = st.session_state.get("API_URL", "http://localhost:8000/api")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+DATA_DIR = os.path.join(BASE_DIR, 'data')
+
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 @st.cache_data(ttl=300)
 def fetch_historical():
     try:
-        resp = requests.get(f"{API_URL}/historical")
-        resp.raise_for_status()
-        data = resp.json()
-        if isinstance(data, list) and len(data) > 0:
-            return pd.DataFrame(data)
-        return pd.DataFrame()
+        from Forecasting.pipeline import load_google_ads, load_meta_ads, load_microsoft_ads, aggregate_to_weekly
+        df_g = load_google_ads(os.path.join(DATA_DIR, 'google_ads_campaign_stats.csv'))
+        df_m = load_meta_ads(os.path.join(DATA_DIR, 'meta_ads_campaign_stats.csv'))
+        df_b = load_microsoft_ads(os.path.join(DATA_DIR, 'bing_campaign_stats.csv'))
+        df_all = pd.concat([df_g, df_m, df_b], ignore_index=True)
+        weekly_df = aggregate_to_weekly(df_all)
+        weekly_df['week_start'] = weekly_df['week_start'].astype(str)
+        return weekly_df.sort_values(['week_start', 'channel'])
     except Exception as e:
         st.error(f"Failed to load historical data: {e}")
         return pd.DataFrame()

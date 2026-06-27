@@ -1,54 +1,80 @@
 import streamlit as st
-import requests
+import json
+import os
 import plotly.graph_objects as go
 
 st.set_page_config(page_title="Dashboard | AIgnition", page_icon="📊", layout="wide")
 
-API_URL = st.session_state.get("API_URL", "http://localhost:8000/api")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 
-colA, colB = st.columns([3, 1])
-with colA:
-    st.title("Account Overview")
-with colB:
-    st.markdown("<br>", unsafe_allow_html=True)
-    f_days = st.selectbox("Forecast Window", [30, 60, 90], index=0, label_visibility="collapsed")
-    if st.button("Update Forecast", use_container_width=True):
-        with st.spinner(f"Generating {f_days}-day forecast..."):
-            try:
-                requests.post(f"{API_URL}/forecast/generate?days={f_days}")
-                st.cache_data.clear()
-                st.rerun()
-            except Exception as e:
-                st.error("Failed to generate forecast")
+# colA, colB = st.columns([3, 1])
+# with colA:
+#     st.title("Account Overview")
+# with colB:
+#     st.markdown("<br>", unsafe_allow_html=True)
+#     f_days = st.selectbox("Forecast Window", [30, 60, 90], index=0, label_visibility="collapsed")
+#     if st.button("Update Forecast", use_container_width=True):
+#         with st.spinner(f"Generating {f_days}-day forecast..."):
+#             try:
+#                 requests.post(f"{API_URL}/forecast/generate?days={f_days}")
+#                 st.cache_data.clear()
+#                 st.rerun()
+#             except Exception as e:
+#                 st.error("Failed to generate forecast")
+st.title("Account Overview")
 
 @st.cache_data(ttl=60)
+# def fetch_overview():
+#     try:
+#         response = requests.get(f"{API_URL}/forecast")
+#         response.raise_for_status()
+#         return response.json()
+#     except Exception as e:
+#         st.error(f"Failed to fetch forecast: {e}")
+#         return None
 def fetch_overview():
-    try:
-        response = requests.get(f"{API_URL}/forecast")
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        st.error(f"Failed to fetch forecast: {e}")
+    fpath = os.path.join(BASE_DIR, 'Forecasting', 'forecast_output.json')
+    if not os.path.exists(fpath):
         return None
+    with open(fpath, 'r') as f:
+        data = json.load(f)
+    return {
+        "forecast_period_days": data.get("forecast_period_days", 30),
+        "scenario": data.get("scenario", "Baseline"),
+        "total_budget": data.get("total_budget_input", 0.0),
+        "revenue": data.get("revenue", {}),
+        "blended_roas": data.get("blended_roas", {})
+    }
 
 @st.cache_data(ttl=60)
 def fetch_channels():
-    try:
-        response = requests.get(f"{API_URL}/forecast/channels")
-        response.raise_for_status()
-        return response.json().get("channels", {})
-    except Exception as e:
+    # try:
+    #     response = requests.get(f"{API_URL}/forecast/channels")
+    #     response.raise_for_status()
+    #     return response.json().get("channels", {})
+    # except Exception as e:
+    #     return {}
+    fpath = os.path.join(BASE_DIR, 'Forecasting', 'forecast_output.json')
+    if not os.path.exists(fpath):
         return {}
+    with open(fpath, 'r') as f:
+        data = json.load(f)
+    return data.get("channels", {})
 
 @st.cache_data(ttl=60)
 def fetch_insights():
-    try:
-        response = requests.get(f"{API_URL}/insights")
-        if response.status_code == 200:
-            return response.json()
+    # try:
+    #     response = requests.get(f"{API_URL}/insights")
+    #     if response.status_code == 200:
+    #         return response.json()
+    #     return None
+    # except:
+    #     return None
+    fpath = os.path.join(BASE_DIR, 'llm_Integration', 'causal_output.json')
+    if not os.path.exists(fpath):
         return None
-    except:
-        return None
+    with open(fpath, 'r') as f:
+        return json.load(f)
 
 data = fetch_overview()
 channels = fetch_channels()
