@@ -1,12 +1,3 @@
----
-title: Probabilistic Revenue Forecasting
-emoji: 📈
-colorFrom: indigo
-colorTo: green
-sdk: docker
-pinned: false
----
-
 # 📈 Probabilistic Revenue Forecasting for E-Commerce Marketing
 
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
