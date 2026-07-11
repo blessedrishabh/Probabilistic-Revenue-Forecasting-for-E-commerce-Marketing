@@ -1,2 +1,4 @@
-status,message
-success,placeholder
+Channel,Budget_Allocated,Revenue_P10,Revenue_P50,Revenue_P90,ROAS_P50
+google,50887.87,137275.45,187139.41,271144.54,3.68
+meta,7641.12,18234.34,25373.02,35673.82,3.32
+microsoft,4167.47,2502.52,7780.98,27983.81,1.87
