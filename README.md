@@ -11,7 +11,7 @@ pinned: false
 
 [![Python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.45-FF4B4B.svg?style=flat&logo=streamlit)](https://streamlit.io)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3.0-F7931E.svg?style=flat&logo=scikit-learn)](https://scikit-learn.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.9.0-F7931E.svg?style=flat&logo=scikit-learn)](https://scikit-learn.org/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-AI_Insights-1C3C3C.svg?style=flat&logo=langchain)](https://langchain-ai.github.io/langgraph/)
 
 A production-grade, end-to-end Bayesian forecasting system that ingests omni-channel marketing data (Google Ads, Meta Ads, Microsoft Ads), generates **probabilistic revenue predictions with calibrated uncertainty intervals (P10/P50/P90)**, and delivers LLM-powered causal summaries — all through an interactive Streamlit dashboard.
@@ -60,13 +60,25 @@ This project was built following **Bayesian-first** and **Mathematical Honesty**
 
 ## 🚀 How to Run the Project (Step-by-Step)
 
+### ⚡ Quick Start (For Evaluators)
+```bash
+git clone https://github.com/blessedrishabh/Probabilistic-Revenue-Forecasting-for-E-commerce-Marketing.git
+cd Probabilistic-Revenue-Forecasting-for-E-commerce-Marketing
+pip install -r requirements.txt
+bash run.sh
+```
+Output will be at `output/predictions.csv`. No API keys or extra setup needed.
+
+> **Note:** Steps 2, 3, and 5 below are for **local development only** (AI Insights dashboard). The core forecasting pipeline runs fully offline with no internet or API keys.
+
+### Full Local Setup
 To run this entire system end-to-end on your local machine, follow these instructions.
 
 ### Step 1: Environment Setup
 Clone the repository and install the locked dependencies to guarantee reproducibility.
 ```bash
-git clone https://github.com/your-username/Probabilistic-Revenue-Forecasting.git
-cd Probabilistic-Revenue-Forecasting
+git clone https://github.com/blessedrishabh/Probabilistic-Revenue-Forecasting-for-E-commerce-Marketing.git
+cd Probabilistic-Revenue-Forecasting-for-E-commerce-Marketing
 
 # Create and activate a virtual environment
 python -m venv .venv
