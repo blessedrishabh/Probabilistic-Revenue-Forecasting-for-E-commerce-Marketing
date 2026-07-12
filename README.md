@@ -96,11 +96,15 @@ python Forecasting/train.py
 *You should see "Models successfully saved to pickle/model.pkl" in the terminal.*
 
 ### Step 4: Generate the Baseline Forecast
-Load the pre-trained model and produce probabilistic predictions. You can specify a forecast window of 30, 60, or 90 days:
+Load the pre-trained model and produce probabilistic predictions. The default forecast window is **30 days**:
 ```bash
 python Forecasting/main.py --data_dir ./data --model_path ./pickle/model.pkl --output_path ./output/predictions.csv
 ```
-Or simply run the hackathon entry point:
+To forecast for a different period, use the `--days` flag (supports 30, 60, or 90):
+```bash
+python Forecasting/main.py --data_dir ./data --model_path ./pickle/model.pkl --output_path ./output/predictions.csv --days 60
+```
+Or simply run the hackathon entry point (defaults to 30 days):
 ```bash
 bash run.sh
 ```
